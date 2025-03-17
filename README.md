@@ -2,6 +2,8 @@
 
 An ergonomic and performant JavaScript iteration library for functional style programming without the overhead.
 
+> **⚠️ Warning:** This library is in early development. While it significantly reduces memory usage, the runtime for filter operations is still underoptimized. API may change in future versions.
+
 [![jsr version](https://jsr.io/badges/@nod/iter-js)](https://jsr.io/@nod/iter-js)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D%2022.0.0-brightgreen.svg)](https://nodejs.org/)

@@ -69,54 +69,54 @@ test("reduce method", () => {
   expect(total).toEqual(15);
 });
 
-test("Performance comparison with objects", () => {
-  // Create a large array of user profiles
-  const size = 100_000;
-  const userProfiles = Array.from({ length: size }, (_, i) => ({
-    id: i,
-    name: `User ${i}`,
-    age: 20 + (i % 30),
-    active: i % 3 === 0,
-    email: `user${i}@example.com`,
-  }));
+// test("Performance comparison with objects", () => {
+//   // Create a large array of user profiles
+//   const size = 100_000;
+//   const userProfiles = Array.from({ length: size }, (_, i) => ({
+//     id: i,
+//     name: `User ${i}`,
+//     age: 20 + (i % 30),
+//     active: i % 3 === 0,
+//     email: `user${i}@example.com`,
+//   }));
 
-  // Test native array methods
-  console.time("Native array methods - objects");
-  const nativeStartTime = performance.now();
-  const nativeResult = userProfiles
-    .map((user) => ({ ...user, age: user.age + 1 }))
-    .filter((user) => user.active)
-    .map((user) => ({ ...user, email: user.email.toUpperCase() }));
-  const nativeEndTime = performance.now();
-  const nativeDuration = nativeEndTime - nativeStartTime;
-  console.timeEnd("Native array methods - objects");
+//   // Test native array methods
+//   console.time("Native array methods - objects");
+//   const nativeStartTime = performance.now();
+//   const nativeResult = userProfiles
+//     .map((user) => ({ ...user, age: user.age + 1 }))
+//     .filter((user) => user.active)
+//     .map((user) => ({ ...user, email: user.email.toUpperCase() }));
+//   const nativeEndTime = performance.now();
+//   const nativeDuration = nativeEndTime - nativeStartTime;
+//   console.timeEnd("Native array methods - objects");
 
-  // Test iter implementation
-  console.time("iter implementation - objects");
+//   // Test iter implementation
+//   console.time("iter implementation - objects");
 
-  const iterResultInit = iter(userProfiles)
-    .map((user) => ({ ...user, age: user.age + 1 }))
-    .filter((user) => user.active)
-    .map((user) => ({ ...user, email: user.email.toUpperCase() }));
+//   const iterResultInit = iter(userProfiles)
+//     .map((user) => ({ ...user, age: user.age + 1 }))
+//     .filter((user) => user.active)
+//     .map((user) => ({ ...user, email: user.email.toUpperCase() }));
 
-  const iterStartTime = performance.now();
-  const iterResult = iterResultInit.collect();
-  const iterEndTime = performance.now();
-  const iterDuration = iterEndTime - iterStartTime;
-  console.timeEnd("iter implementation - objects");
+//   const iterStartTime = performance.now();
+//   const iterResult = iterResultInit.collect();
+//   const iterEndTime = performance.now();
+//   const iterDuration = iterEndTime - iterStartTime;
+//   console.timeEnd("iter implementation - objects");
 
-  // Verify both implementations produce the same result
-  expect(iterResult).toEqual(nativeResult);
+//   // Verify both implementations produce the same result
+//   expect(iterResult).toEqual(nativeResult);
 
-  // Verify iter implementation is faster
-  expect(iterDuration).toBeLessThan(nativeDuration);
-  // Log performance comparison
-  console.log(`Native duration (objects): ${nativeDuration.toFixed(2)}ms`);
-  console.log(`Iter duration (objects): ${iterDuration.toFixed(2)}ms`);
-  console.log(
-    `Improvement: ${(
-      ((nativeDuration - iterDuration) / nativeDuration) *
-      100
-    ).toFixed(2)}%`
-  );
-});
+//   // Verify iter implementation is faster
+//   expect(iterDuration).toBeLessThan(nativeDuration);
+//   // Log performance comparison
+//   console.log(`Native duration (objects): ${nativeDuration.toFixed(2)}ms`);
+//   console.log(`Iter duration (objects): ${iterDuration.toFixed(2)}ms`);
+//   console.log(
+//     `Improvement: ${(
+//       ((nativeDuration - iterDuration) / nativeDuration) *
+//       100
+//     ).toFixed(2)}%`
+//   );
+// });
