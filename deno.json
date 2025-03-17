@@ -1,4 +1,8 @@
 {
+    "name": "@nod/iter-js",
+    "version": "0.2.1",
+    "license": "MIT",
+    "exports": "./src/index.ts",
     "tasks": {
         "bench": "deno bench bench/bench.ts --allow-read"
     },
