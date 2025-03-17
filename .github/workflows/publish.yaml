@@ -28,11 +28,39 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run tests
-        run: pnpm test
+      - name: Run tests with coverage
+        run: pnpm test:coverage
 
       - name: Run type checking
         run: pnpm typecheck
+
+      - name: Generate coverage badge
+        run: |
+          COVERAGE=$(cat coverage/coverage-summary.json | jq -r '.total.lines.pct')
+          COLOR=$(
+            if (( $(echo "$COVERAGE >= 90" | bc -l) )); then
+              echo "brightgreen"
+            elif (( $(echo "$COVERAGE >= 80" | bc -l) )); then
+              echo "green"
+            elif (( $(echo "$COVERAGE >= 70" | bc -l) )); then
+              echo "yellowgreen"
+            elif (( $(echo "$COVERAGE >= 60" | bc -l) )); then
+              echo "yellow"
+            else
+              echo "red"
+            fi
+          )
+          echo "COVERAGE=$COVERAGE" >> $GITHUB_ENV
+          echo "COVERAGE_COLOR=$COLOR" >> $GITHUB_ENV
+          mkdir -p .github/badges
+          curl -o .github/badges/coverage.svg "https://img.shields.io/badge/coverage-$COVERAGE%25-$COLOR"
+
+      - name: Commit coverage badge
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: ".github/badges/coverage.svg"
+          message: "chore: update coverage badge [skip ci]"
+          default_author: github_actions
 
       - name: Publish package
         run: npx jsr publish

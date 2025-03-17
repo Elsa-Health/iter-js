@@ -17,6 +17,7 @@
   "scripts": {
     "test": "vitest run tests/index.ts",
     "test:watch": "vitest tests/index.ts",
+    "test:coverage": "vitest run tests/index.ts --coverage",
     "typecheck": "tsc --noEmit",
     "build": "tsc --project tsconfig.build.json",
     "build:commonjs": "tsc --project tsconfig.build.json --module commonjs --outDir lib/commonjs",
@@ -42,7 +43,8 @@
   "devDependencies": {
     "typescript": "^5.3.3",
     "vitest": "^3.0.8",
-    "@types/node": "^20.10.5"
+    "@types/node": "^20.10.5",
+    "@vitest/coverage-v8": "^3.0.8"
   },
   "engines": {
     "node": ">= 20.0.0"

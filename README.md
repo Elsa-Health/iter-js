@@ -2,9 +2,10 @@
 
 An ergonomic and performant JavaScript iteration library for functional style programming without the overhead.
 
-[![npm version](https://img.shields.io/npm/v/iter-js.svg)](https://www.npmjs.com/package/iter-js)
+[![jsr version](https://jsr.io/badges/@nod/iter-js)](https://jsr.io/@nod/iter-js)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D%2022.0.0-brightgreen.svg)](https://nodejs.org/)
+[![Test Coverage](https://github.com/YOUR_USERNAME/iter-js/raw/main/.github/badges/coverage.svg)](https://github.com/YOUR_USERNAME/iter-js/actions/workflows/publish.yaml)
 
 ## Features
 
@@ -17,17 +18,19 @@ An ergonomic and performant JavaScript iteration library for functional style pr
 ## Installation
 
 ```bash
-npm install iter-js
+npx jsr add @nod/iter-js
 # or
-yarn add iter-js
+yarn dlx jsr add @nod/iter-js
 # or
-pnpm add iter-js
+pnpm dlx jsr add @nod/iter-js
+# or
+bunx jsr add @nod/iter-js
 ```
 
 ## Usage
 
 ```typescript
-import { iter } from "iter-js";
+import iter from "@nod/iter-js";
 
 // Basic example
 const result = iter([1, 2, 3, 4, 5])
