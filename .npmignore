@@ -1,0 +1,17 @@
+# Source
+# src/
+
+# Tests
+tests/
+**/__tests__/
+**/*.test.ts
+**/*.spec.ts
+
+# Configuration
+tsconfig.json
+tsconfig.build.json
+.gitignore
+.github
+
+# Build tools
+node_modules/

@@ -1,0 +1,50 @@
+{
+  "name": "iter-js",
+  "version": "0.2.1",
+  "description": "An ergonomic and performant javascript iteration library for functional style programming without the overhead.",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/index.d.ts",
+  "author": "3210jr",
+  "source": "src/index.ts",
+  "files": [
+    "src",
+    "lib",
+    "!**/__tests__",
+    "!**/__fixtures__",
+    "!**/__mocks__"
+  ],
+  "scripts": {
+    "test": "vitest run tests/index.ts",
+    "test:watch": "vitest tests/index.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --project tsconfig.build.json",
+    "build:commonjs": "tsc --project tsconfig.build.json --module commonjs --outDir lib/commonjs",
+    "build:module": "tsc --project tsconfig.build.json --module es2015 --outDir lib/module",
+    "build:typescript": "tsc --project tsconfig.build.json --declaration --declarationDir lib/typescript --emitDeclarationOnly",
+    "build:all": "npm run build:commonjs && npm run build:module && npm run build:typescript",
+    "clean": "rm -rf lib",
+    "prepare": "npm run clean && npm run build:all",
+    "prepublishOnly": "npm run test && npm run typecheck"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "functional",
+    "iteration",
+    "iterator",
+    "lazy",
+    "performance"
+  ],
+  "license": "MIT",
+  "packageManager": "pnpm@10.6.3",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "vitest": "^3.0.8",
+    "@types/node": "^20.10.5"
+  },
+  "engines": {
+    "node": ">= 20.0.0"
+  }
+}
