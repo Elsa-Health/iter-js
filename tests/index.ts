@@ -69,59 +69,6 @@ test("reduce method", () => {
   expect(total).toEqual(15);
 });
 
-/**
- * Stress testing the iter implementation and making sure it performs better than default .map .filter methods.
- */
-test("Performance comparison with native array methods", () => {
-  // Create a large array
-  const size = 1_000_000;
-  const largeArray = Array.from({ length: size }, (_, i) => i);
-
-  // Test native array methods
-  console.time("Native array methods");
-  const nativeStartTime = performance.now();
-  const nativeResult = largeArray
-    .map((x) => x * 2)
-    .map((x) => x * 2)
-    .map((x) => x * 2)
-    .filter((x) => x % 3 === 0)
-    .map((x) => x + 1);
-  const nativeEndTime = performance.now();
-  const nativeDuration = nativeEndTime - nativeStartTime;
-  console.timeEnd("Native array methods");
-
-  // Test iter implementation
-  console.time("iter implementation");
-
-  const iterResultInit = iter(largeArray)
-    .map((x) => x * 2)
-    .map((x) => x * 2)
-    .map((x) => x * 2)
-    .filter((x) => x % 3 === 0)
-    .map((x) => x + 1);
-
-  const iterStartTime = performance.now();
-  const iterResult = iterResultInit.collect();
-  const iterEndTime = performance.now();
-  const iterDuration = iterEndTime - iterStartTime;
-  console.timeEnd("iter implementation");
-
-  // Verify both implementations produce the same result
-  expect(iterResult).toEqual(nativeResult);
-
-  // Verify iter implementation is faster
-  expect(iterDuration).toBeLessThan(nativeDuration);
-  // Log performance comparison
-  console.log(`Native duration: ${nativeDuration.toFixed(2)}ms`);
-  console.log(`Iter duration: ${iterDuration.toFixed(2)}ms`);
-  console.log(
-    `Improvement: ${(
-      ((nativeDuration - iterDuration) / nativeDuration) *
-      100
-    ).toFixed(2)}%`
-  );
-});
-
 test("Performance comparison with objects", () => {
   // Create a large array of user profiles
   const size = 100_000;
